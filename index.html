@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi flaca preciosa 🌹</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at center, #35152d, #170b1c 65%, #08050d);
+      color: white;
+    }
+
+    .contenedor {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: clamp(1.7rem, 5vw, 2.8rem);
+      color: #ffb6d9;
+      text-shadow: 0 0 15px #ff4f9a;
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      color: #f8d8e9;
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+
+    /* Rosa */
+    .rosa {
+      position: relative;
+      width: 220px;
+      height: 300px;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      filter: drop-shadow(0 0 20px rgba(255, 53, 145, 0.4));
+    }
+
+    .rosa:hover {
+      transform: scale(1.06);
+    }
+
+    .rosa:active {
+      transform: scale(0.95);
+    }
+
+    .flor {
+      position: absolute;
+      top: 5px;
+      left: 25px;
+      width: 170px;
+      height: 170px;
+      animation: respirar 3s ease-in-out infinite;
+    }
+
+    .petalo {
+      position: absolute;
+      width: 85px;
+      height: 110px;
+      background: linear-gradient(135deg, #ffb1d1, #ed277c 65%, #a90c50);
+      border-radius: 70% 30% 65% 35%;
+      box-shadow:
+        inset 5px 4px 10px rgba(255,255,255,0.35),
+        0 0 10px rgba(255, 62, 145, 0.25);
+      transform-origin: bottom center;
+    }
+
+    .petalo:nth-child(1) {
+      left: 42px;
+      top: 35px;
+      transform: rotate(0deg);
+      z-index: 5;
+    }
+
+    .petalo:nth-child(2) {
+      left: 12px;
+      top: 30px;
+      transform: rotate(-42deg);
+      z-index: 4;
+    }
+
+    .petalo:nth-child(3) {
+      left: 72px;
+      top: 30px;
+      transform: rotate(42deg) scaleX(-1);
+      z-index: 4;
+    }
+
+    .petalo:nth-child(4) {
+      left: 5px;
+      top: 65px;
+      transform: rotate(-75deg);
+      z-index: 3;
+    }
+
+    .petalo:nth-child(5) {
+      left: 80px;
+      top: 65px;
+      transform: rotate(75deg) scaleX(-1);
+      z-index: 3;
+    }
+
+    .petalo:nth-child(6) {
+      left: 40px;
+      top: 65px;
+      width: 95px;
+      height: 90px;
+      background: linear-gradient(135deg, #ff72ae, #c20c5e);
+      transform: rotate(180deg);
+      z-index: 2;
+    }
+
+    .centro {
+      position: absolute;
+      top: 72px;
+      left: 67px;
+      width: 40px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff9ac4, #b80b58);
+      border-radius: 50%;
+      z-index: 7;
+      box-shadow: inset 3px 2px 7px rgba(255,255,255,0.3);
+    }
+
+    .tallo {
+      position: absolute;
+      top: 155px;
+      left: 104px;
+      width: 13px;
+      height: 145px;
+      background: linear-gradient(to right, #245b35, #68a94e, #1c492d);
+      border-radius: 10px;
+      z-index: -1;
+      transform: rotate(2deg);
+    }
+
+    .hoja {
+      position: absolute;
+      width: 70px;
+      height: 35px;
+      background: linear-gradient(135deg, #6eaf55, #1b542e);
+      border-radius: 100% 0 100% 0;
+      z-index: 1;
+    }
+
+    .hoja.izquierda {
+      top: 220px;
+      left: 42px;
+      transform: rotate(-25deg);
+    }
+
+    .hoja.derecha {
+      top: 245px;
+      left: 110px;
+      transform: rotate(25deg) scaleX(-1);
+    }
+
+    .hoja::after {
+      content: "";
+      position: absolute;
+      width: 55px;
+      height: 2px;
+      background: rgba(190, 230, 150, 0.6);
+      top: 17px;
+      left: 8px;
+      transform: rotate(-10deg);
+    }
+
+    @keyframes respirar {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.04) rotate(1deg); }
+    }
+
+    /* Tarjeta del mensaje */
+    .mensaje {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.8s ease;
+      margin: 0 auto;
+    }
+
+    .mensaje.mostrar {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      max-height: 180px;
+      margin-top: 15px;
+    }
+
+    .tarjeta {
+      display: inline-block;
+      padding: 18px 25px;
+      border: 1px solid rgba(255, 157, 204, 0.5);
+      border-radius: 20px;
+      background: rgba(255, 105, 174, 0.12);
+      box-shadow: 0 0 25px rgba(255, 51, 143, 0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .tarjeta h2 {
+      margin: 0 0 8px;
+      color: #ffafd2;
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+    }
+
+    .tarjeta p {
+      margin: 0;
+      color: #ffe5f1;
+      font-size: 0.95rem;
+    }
+
+    .boton {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      background: linear-gradient(135deg, #ff4f9a, #c21d6b);
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 67, 153, 0.35);
+      transition: 0.3s;
+    }
+
+    .boton:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(255, 67, 153, 0.65);
+    }
+
+    /* Corazones */
+    .corazon {
+      position: fixed;
+      bottom: -30px;
+      color: #ff70b2;
+      font-size: 20px;
+      pointer-events: none;
+      animation: flotar linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .instruccion {
+      color: #dca9c7;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor">
+    <h1>🌸 Una rosa para ti 🌸</h1>
+    <p class="subtitulo">Hay un pequeño detalle esperando por ti...</p>
+
+    <div class="rosa" id="rosa" title="Haz clic en la rosa">
+      <div class="flor">
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="petalo"></div>
+        <div class="centro"></div>
+      </div>
+
+      <div class="tallo"></div>
+      <div class="hoja izquierda"></div>
+      <div class="hoja derecha"></div>
+    </div>
+
+    <p class="instruccion">Haz clic en la rosa 🌹</p>
+
+    <div class="mensaje" id="mensaje">
+      <div class="tarjeta">
+        <h2>💖 De mi para mi flaca preciosa 💖</h2>
+        <p>
+          Esta rosita es para recordarte lo especial<br>
+          que eres para mí. 🌷✨
+        </p>
+      </div>
+    </div>
+
+    <button class="boton" id="boton">Abrir mi dedicatoria 💌</button>
+  </div>
+
+  <script>
+    const rosa = document.getElementById("rosa");
+    const boton = document.getElementById("boton");
+    const mensaje = document.getElementById("mensaje");
+
+    function mostrarMensaje() {
+      mensaje.classList.add("mostrar");
+      boton.textContent = "Te quiero mucho 💗";
+
+      // Crear corazones adicionales
+      for (let i = 0; i < 15; i++) {
+        setTimeout(crearCorazon, i * 120);
+      }
+    }
+
+    rosa.addEventListener("click", mostrarMensaje);
+    boton.addEventListener("click", mostrarMensaje);
+
+    function crearCorazon() {
+      const corazon = document.createElement("div");
+      corazon.className = "corazon";
+      corazon.textContent = Math.random() > 0.5 ? "💗" : "💕";
+
+      corazon.style.left = Math.random() * 100 + "vw";
+      corazon.style.fontSize = (14 + Math.random() * 20) + "px";
+      corazon.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+      document.body.appendChild(corazon);
+
+      setTimeout(() => {
+        corazon.remove();
+      }, 9000);
+    }
+
+    // Corazones de fondo constantes
+    setInterval(crearCorazon, 900);
+  </script>
+
+</body>
+</html>
